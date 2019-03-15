@@ -23,6 +23,14 @@ export default class HTTP {
   }
 
   handleSuccess (res) {
+    const content = res.data.msg
+    if (content) {
+      Dialog.$create({
+        type: 'alert',
+        title: '提示',
+        content
+      }).show()
+    }
     return res.data
   }
 

@@ -1,40 +1,75 @@
 <template>
   <div>
     <home-header
-      @hideBottomNavi='hideBottomNavi'
       :naviBars='naviBars'
-    ></home-header>
-    <Home-recommend class="home-recommend"></Home-recommend>
+      @hideBottomNavi='hideBottomNavi'
+      :compNames='compNames'
+      :tabBarselectedLabel='tabBarselectedLabel'
+    >
+      <template #default='{compName}'>
+        <component :is='compName'></component>
+      </template>
+    </home-header>
     <bottom-navi-bar v-show="showBottomNavi"></bottom-navi-bar>
   </div>
 </template>
 <script>
 import HTTP from '@/utils/http.js'
 import HomeHeader from './components/Header'
-import BottomNaviBar from 'common/navibar/BottomNaviBar'
+import HomeAppliance from './appliance/Appliance'
+import HomeIntelligence from './intelligence/Intelligence'
+import HomeLife from './life/Life'
+import HomeNotebook from './notebook/Notebook'
+import HomePhone from './phone/Phone'
 import HomeRecommend from './recommend/Recommend'
+import HomeTelevision from './television/Television'
+import BottomNaviBar from 'common/navibar/BottomNaviBar'
 
 const http = new HTTP()
 export default {
   name: 'Home',
   components: {
-    HomeHeader, HomeRecommend, BottomNaviBar
+    HomeHeader,
+    HomeAppliance,
+    HomeIntelligence,
+    HomeLife,
+    HomeNotebook,
+    HomePhone,
+    HomeRecommend,
+    HomeTelevision,
+    BottomNaviBar
   },
   data () {
     return {
+      /**
+       * 这个地方不能为空数组
+       * 因为 naviBars 数据是从后台异步获取的，子组件刚开始获取的naviBars是初始数据，若是空数组，
+       * 子组件cube-tab-bar选中项下划线会不显示
+       */
+      naviBars: [{
+        label: '推荐'
+      }],
+      tabBarselectedLabel: '推荐',
       showBottomNavi: true,
-      naviBars: []
+      compNames: [
+        'HomeRecommend',
+        'HomePhone',
+        'HomeIntelligence',
+        'HomeTelevision',
+        'HomeNotebook',
+        'HomeLife',
+        'HomeAppliance'
+      ]
     }
+  },
+  computed: {
   },
   methods: {
     hideBottomNavi () {
       this.showBottomNavi = !this.showBottomNavi
     },
     getHomeInfoSucc (res) {
-      if (res.error_code === 200 && res.data) {
-        const data = res.data
-        this.naviBars = data.naviBars
-      }
+      this.naviBars = res.naviBars
     }
   },
   mounted () {
@@ -45,6 +80,4 @@ export default {
 }
 </script>
 <style lang='stylus' scoped>
-.home-recommend
-  margin-top: 1.5rem
 </style>

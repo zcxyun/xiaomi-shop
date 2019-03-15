@@ -1,7 +1,16 @@
 <template>
   <div class="recommend-header-swiper">
-    <cube-slide ref="slide" :data="headerSwiperImgs" @change="changePage" :loop='true'>
-      <cube-slide-item v-for="(item, index) in headerSwiperImgs" :key="index" @click.native="clickHandler(item, index)">
+    <cube-slide ref="slide"
+      :data="headerSwiperImgs"
+      @change="changePage"
+      :loop='true'
+      :options='slideOptions'
+    >
+      <cube-slide-item
+        v-for="(item, index) in headerSwiperImgs"
+        :key="index"
+        @click.native="clickHandler(item, index)"
+      >
         <router-link :to="item.url">
           <img :src="item.image" class="swiper-img">
         </router-link>
@@ -24,6 +33,13 @@ export default {
   name: 'RecommendHeaderSwiper',
   props: {
     headerSwiperImgs: Array
+  },
+  data () {
+    return {
+      slideOptions: {
+        stopPropagation: true
+      }
+    }
   },
   methods: {
     changePage (current) {
