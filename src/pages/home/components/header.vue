@@ -49,7 +49,7 @@
               <div :class="inTabBarselectedLabel === item.label ?
                 'navi-panel-item-content navi-panel-item-active' :
                 'navi-panel-item-content'"
-                @click="onNaviClick(item.label, index)"
+                @click="onNaviClick(index)"
               >
                 {{item.label}}
               </div>
@@ -127,18 +127,20 @@ export default {
       this.showNaviPanel = !this.showNaviPanel
       this.showMask = !this.showMask
     },
-    onNaviClick (label, current) {
+    onNaviClick (current) {
       this.initNaviData()
-      this.inTabBarselectedLabel = label
       this.changePage(current)
-      // 此处不明白为什么要加计时器才能触发导航条滚动
-      setTimeout(() => {
-        this.onTabChange(label)
-      }, 10)
     },
     onTabChange (label) {
       const element = this.$refs[label][0].$el
       this.$refs.scroll.scroll.scrollToElement(element, 1000, true)
+    },
+    changePage (current) {
+      this.inTabBarselectedLabel = this.naviBars[current].label
+      // 此处不明白为什么要加计时器才能触发导航条滚动
+      setTimeout(() => {
+        this.onTabChange(this.inTabBarselectedLabel)
+      }, 10)
     },
     onShadeMaskClick () {
       this.initNaviData()
@@ -150,9 +152,6 @@ export default {
     },
     onSearch () {
       this.$emit('hideBottomNavi')
-    },
-    changePage (current) {
-      this.inTabBarselectedLabel = this.naviBars[current].label
     },
     scroll (pos) {
       // const x = Math.abs(pos.x)
