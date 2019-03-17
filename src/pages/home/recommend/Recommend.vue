@@ -24,6 +24,8 @@
     <recommend-hint-bar :hint='moreIntelligenceHint'></recommend-hint-bar>
 
     <recommend-themes :imgs='themesImgs'></recommend-themes>
+    <recommend-advert :img='advertImgs.intelligencesBest'></recommend-advert>
+    <recommend-hint-bar :hint='aboutMi'></recommend-hint-bar>
 
   </div>
 </template>
@@ -56,7 +58,8 @@ export default {
       notebooks: {},
       appliances: {},
       intelligences: {},
-      themesImgs: []
+      themesImgs: [],
+      aboutMi: '了解小米'
     }
   },
   components: {
@@ -93,4 +96,5 @@ export default {
 <style lang='stylus' scoped>
 .recommend
   background: rgb(245, 245, 245)
+  padding-bottom: .1rem
 </style>
