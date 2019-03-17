@@ -23,6 +23,8 @@
     <recommend-products-odd :products='intelligences'></recommend-products-odd>
     <recommend-hint-bar :hint='moreIntelligenceHint'></recommend-hint-bar>
 
+    <recommend-themes :imgs='themesImgs'></recommend-themes>
+
   </div>
 </template>
 <script>
@@ -33,6 +35,7 @@ import RecommendNews from './components/News'
 import RecommendProducts from './components/Products'
 import RecommendHintBar from './components/HintBar'
 import RecommendProductsOdd from './components/ProductsOdd'
+import RecommendThemes from './components/Themes'
 import HTTP from '@/utils/http.js'
 const http = new HTTP()
 
@@ -52,7 +55,8 @@ export default {
       moreIntelligenceHint: '更多米家智能产品 >',
       notebooks: {},
       appliances: {},
-      intelligences: {}
+      intelligences: {},
+      themesImgs: []
     }
   },
   components: {
@@ -62,7 +66,8 @@ export default {
     RecommendAdvert,
     RecommendProducts,
     RecommendHintBar,
-    RecommendProductsOdd
+    RecommendProductsOdd,
+    RecommendThemes
   },
   mounted () {
     http.request({
@@ -80,6 +85,7 @@ export default {
       this.notebooks = res.notebooks
       this.appliances = res.appliances
       this.intelligences = res.intelligences
+      this.themesImgs = res.themesImgs
     }
   }
 }
