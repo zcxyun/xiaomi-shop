@@ -13,9 +13,6 @@
         </div>
       </div>
     </div>
-    <div class="news-bottom">
-      <img :src="newsImgs.exposure_img4" class="news-bottom-img">
-    </div>
   </div>
 </template>
 <script>
@@ -31,7 +28,6 @@ export default {
   background: #fff
   .news-top
     display: flex
-    margin-bottom: .15rem
     .news-top-left
       width: 50%
       height: 0
@@ -50,11 +46,4 @@ export default {
         margin-bottom: .05rem
       .news-top-right-bottom-img
         width: 100%
-  .news-bottom
-    width: 100%
-    height: 0
-    overflow: hidden
-    padding-bottom: 40%
-    .news-bottom-img
-      width: 100%
 </style>

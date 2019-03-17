@@ -3,12 +3,36 @@
     <recommend-header-swiper :headerSwiperImgs='headerSwiperImgs'></recommend-header-swiper>
     <recommend-icons :icons='icons'></recommend-icons>
     <recommend-news :newsImgs='newsImgs'></recommend-news>
+    <recommend-advert :img='advertImgs.redmi'></recommend-advert>
+
+    <recommend-products :products='phones'></recommend-products>
+    <recommend-advert :img='advertImgs.weekend'></recommend-advert>
+
+    <recommend-products :products='televisions'></recommend-products>
+    <recommend-hint-bar :hint='moreTVHint'></recommend-hint-bar>
+    <recommend-advert :img='advertImgs.TV4A'></recommend-advert>
+
+    <recommend-products :products='notebooks'></recommend-products>
+    <recommend-hint-bar :hint='moreNotebookHint'></recommend-hint-bar>
+    <recommend-advert :img='advertImgs.phoneHeisha2'></recommend-advert>
+
+    <recommend-products :products='appliances'></recommend-products>
+    <recommend-hint-bar :hint='moreApplianceHint'></recommend-hint-bar>
+    <recommend-advert :img='advertImgs.notebookAir'></recommend-advert>
+
+    <recommend-products-odd :products='intelligences'></recommend-products-odd>
+    <recommend-hint-bar :hint='moreIntelligenceHint'></recommend-hint-bar>
+
   </div>
 </template>
 <script>
 import RecommendHeaderSwiper from './components/HeaderSwiper'
+import RecommendAdvert from './components/Advert'
 import RecommendIcons from './components/Icons'
 import RecommendNews from './components/News'
+import RecommendProducts from './components/Products'
+import RecommendHintBar from './components/HintBar'
+import RecommendProductsOdd from './components/ProductsOdd'
 import HTTP from '@/utils/http.js'
 const http = new HTTP()
 
@@ -18,11 +42,27 @@ export default {
     return {
       headerSwiperImgs: [],
       icons: [],
-      newsImgs: {}
+      newsImgs: {},
+      advertImgs: {},
+      phones: {},
+      televisions: {},
+      moreTVHint: '更多小米电视产品 >',
+      moreNotebookHint: '更多小米笔记本产品 >',
+      moreApplianceHint: '更多米家家电产品 >',
+      moreIntelligenceHint: '更多米家智能产品 >',
+      notebooks: {},
+      appliances: {},
+      intelligences: {}
     }
   },
   components: {
-    RecommendHeaderSwiper, RecommendIcons, RecommendNews
+    RecommendHeaderSwiper,
+    RecommendIcons,
+    RecommendNews,
+    RecommendAdvert,
+    RecommendProducts,
+    RecommendHintBar,
+    RecommendProductsOdd
   },
   mounted () {
     http.request({
@@ -34,6 +74,12 @@ export default {
       this.headerSwiperImgs = res.headerSwiperImgs
       this.icons = res.icons
       this.newsImgs = res.newsImgs
+      this.advertImgs = res.advertImgs
+      this.phones = res.phones
+      this.televisions = res.televisions
+      this.notebooks = res.notebooks
+      this.appliances = res.appliances
+      this.intelligences = res.intelligences
     }
   }
 }
