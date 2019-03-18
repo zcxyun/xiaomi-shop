@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend-header-swiper">
+  <div class="header-swiper">
     <cube-slide ref="slide"
       :data="headerSwiperImgs"
       @change="changePage"
@@ -7,13 +7,11 @@
       :options='slideOptions'
     >
       <cube-slide-item
-        v-for="(item, index) in headerSwiperImgs"
-        :key="index"
-        @click.native="clickHandler(item, index)"
+        v-for="item in headerSwiperImgs"
+        :key="item.id"
+        @click.native="clickHandler(item.productId)"
       >
-        <router-link :to="item.url">
-          <img :src="item.image" class="swiper-img">
-        </router-link>
+        <img :src="item.image" class="swiper-img">
       </cube-slide-item>
       <template slot="dots" slot-scope="props">
         <span
@@ -30,7 +28,7 @@
 
 <script>
 export default {
-  name: 'RecommendHeaderSwiper',
+  name: 'HeaderSwiper',
   props: {
     headerSwiperImgs: Array
   },
@@ -45,17 +43,17 @@ export default {
     changePage (current) {
       // console.log('当前轮播图序号为:' + current)
     },
-    clickHandler (item, index) {
-      // console.log(item, index)
+    clickHandler (productId) {
+      this.$emit('onSwiper', productId)
     }
   }
 }
 </script>
 <style lang='stylus' scoped>
-.recommend-header-swiper >>> .cube-slide
+.header-swiper >>> .cube-slide
   height: unset
 
-.recommend-header-swiper
+.header-swiper
   width: 100%
   height: 0
   overflow: hidden

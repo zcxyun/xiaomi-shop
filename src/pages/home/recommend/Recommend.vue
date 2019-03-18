@@ -1,7 +1,7 @@
 <template>
   <div class="recommend">
     <recommend-header-swiper :headerSwiperImgs='headerSwiperImgs'></recommend-header-swiper>
-    <recommend-icons :icons='icons'></recommend-icons>
+    <recommend-channel-icons :channelIcons='channelIcons'></recommend-channel-icons>
     <recommend-news :newsImgs='newsImgs'></recommend-news>
     <recommend-advert :img='advertImgs.redmi'></recommend-advert>
 
@@ -30,13 +30,13 @@
   </div>
 </template>
 <script>
-import RecommendHeaderSwiper from './components/HeaderSwiper'
+import RecommendHeaderSwiper from 'common/HeaderSwiper'
 import RecommendAdvert from './components/Advert'
-import RecommendIcons from './components/Icons'
+import RecommendChannelIcons from 'common/ChannelIcons'
 import RecommendNews from './components/News'
-import RecommendProducts from './components/Products'
+import RecommendProducts from 'common/products/TwoCol'
 import RecommendHintBar from './components/HintBar'
-import RecommendProductsOdd from './components/ProductsOdd'
+import RecommendProductsOdd from 'common/products/Alternate'
 import RecommendThemes from './components/Themes'
 import HTTP from '@/utils/http.js'
 const http = new HTTP()
@@ -46,7 +46,7 @@ export default {
   data () {
     return {
       headerSwiperImgs: [],
-      icons: [],
+      channelIcons: [],
       newsImgs: {},
       advertImgs: {},
       phones: {},
@@ -64,7 +64,7 @@ export default {
   },
   components: {
     RecommendHeaderSwiper,
-    RecommendIcons,
+    RecommendChannelIcons,
     RecommendNews,
     RecommendAdvert,
     RecommendProducts,
@@ -80,7 +80,7 @@ export default {
   methods: {
     handleSuccInfo (res) {
       this.headerSwiperImgs = res.headerSwiperImgs
-      this.icons = res.icons
+      this.channelIcons = res.channelIcons
       this.newsImgs = res.newsImgs
       this.advertImgs = res.advertImgs
       this.phones = res.phones

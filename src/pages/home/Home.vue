@@ -1,21 +1,21 @@
 <template>
   <div>
-    <home-header
+    <navi-header
       :naviBars='naviBars'
-      @hideBottomNavi='hideBottomNavi'
+      @onSearch='hideBottomNavi'
       :compNames='compNames'
       :tabBarselectedLabel='tabBarselectedLabel'
     >
       <template #default='{compName}'>
         <component :is='compName'></component>
       </template>
-    </home-header>
+    </navi-header>
     <bottom-navi-bar v-show="showBottomNavi"></bottom-navi-bar>
   </div>
 </template>
 <script>
 import HTTP from '@/utils/http.js'
-import HomeHeader from './components/Header'
+import NaviHeader from 'common/navibar/NaviHeader'
 import HomeAppliance from './appliance/Appliance'
 import HomeIntelligence from './intelligence/Intelligence'
 import HomeLife from './life/Life'
@@ -29,7 +29,7 @@ const http = new HTTP()
 export default {
   name: 'Home',
   components: {
-    HomeHeader,
+    NaviHeader,
     HomeAppliance,
     HomeIntelligence,
     HomeLife,

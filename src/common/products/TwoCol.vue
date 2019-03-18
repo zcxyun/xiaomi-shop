@@ -1,8 +1,10 @@
 <template>
-  <div class="products-odd">
-    <div class="topBanner">
-      <img :src="products.topBannerImg" class="topBannerImg">
-    </div>
+  <div class="ProductsTwoCol">
+    <slot>
+      <div class="topBanner">
+        <img :src="products.topBannerImg" class="topBannerImg">
+      </div>
+    </slot>
     <div class="item-wrapper">
       <div class="item" v-for="item of products.productList" :key='item.id'>
         <img :src="item.img" class="item-img">
@@ -23,7 +25,7 @@
 </template>
 <script>
 export default {
-  name: 'RecommendProductsOdd',
+  name: 'ProductsTwoCol',
   props: {
     products: Object
   }
@@ -31,7 +33,7 @@ export default {
 </script>
 <style lang='stylus' scoped>
 @import '~styles/mixins.styl'
-.products-odd
+.ProductsTwoCol
   width: 100%
   background: #fff
   .topBanner
@@ -45,38 +47,39 @@ export default {
     margin-top: .05rem
     width: 100%
     display: flex
-    flex-direction: column
+    flex-wrap: wrap
+    justify-content: space-between
     .item
+      width: 49.7%
       overflow: hidden
-      padding-bottom: 50%
+      padding-bottom: 70%
       height: 0
-      &:nth-of-type(odd)>*
-        float: left
-      &:nth-of-type(even)>*
-        float:right
       .item-img
-        width: 50%
+        width: 100%
       .item-content
-        box-sizing: border-box
-        width: 50%
-        padding-left: .2rem
+        height: 1.5rem
+        width: 100%
+        padding-left: .3rem
+        display: flex
+        flex-direction: column
+        justify-content: center
         .title
-          margin-top: .7rem
           color: #000
           font-size: .3rem
           font-weight: 350
           ellipsis()
         .summary
           color: #999
-          line-height: .5rem
+          line-height: .45rem
           ellipsis()
         .price
-          margin-top: .1rem
+          margin-top: .07rem
           .current-price
             font-size: .3rem
             position: relative
             color: #ea625b
             padding-left: .2rem
+            padding-right: .2rem
             &:before
               content: "¥"
               position: absolute

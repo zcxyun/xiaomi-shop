@@ -3,7 +3,7 @@
     <!-- 阴影遮罩 -->
     <shade-mask :show='showMask' @click.native='onShadeMaskClick'></shade-mask>
     <!-- 顶部搜索栏 -->
-    <div class="home-header">
+    <div class="navi-header">
       <div class="header">
         <img class='logo-img' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAyCAYAAAD2vz2aAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjQ2OUE2MkU0RTQ4MTFFNzgxOTZBRDJFQjk4Qjk0NjQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjQ2OUE2MkY0RTQ4MTFFNzgxOTZBRDJFQjk4Qjk0NjQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCOUQ0QkM2RjREQ0MxMUU3ODE5NkFEMkVCOThCOTQ2NCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCOUQ0QkM3MDREQ0MxMUU3ODE5NkFEMkVCOThCOTQ2NCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiL8gcIAAAF1SURBVHja7Ju/LwRRFEbf+FVsQ0dBdJKNSksUSqVCr6AhKxGVwn+gVUpQEI1So5XoZUOhEbKMDiESIeOTzPbvzpoxz5wvOd3duzsn++7cSXajZMU9OOeGXPmTiHtxIU7FoYh/oe+ZmPKsjSMJS1yY+RS7YrNDcTdi1Le4y4WbHrEorsRcUW8asrB2BsSxWEeYLVtiCWG2bIsJhPmnV+zkeV3/TZhLv2HzCLNlFWG2TIqRvHYZa97FR84XXEvnUSeZEft/LexZDIvXnIVFop6uCQ3RnaHHeBmO5FMBstrPjZdiTUyLlww9Bqs6w87FcobX9Vd56B+IZoZjXVlhP0f0qAwfJKS1ookw+w0HYaEFYQVs+j4ZE7Oed6o3sVfA00OphW2IBUN9S5xU+Uhad6A+ZhhDnyAMYQhDGMIQRhCGMIQhDGEEYQhDGMIQhjCCMIQhDGEIIwhDWFHCLP81vPOsezT0/BK3nj0tP1i59qxrGXrG3wIMAK5yNsqRAjAyAAAAAElFTkSuQmCC" alt="">
         <div class="search" @click="onSearch">
@@ -38,51 +38,53 @@
         <i ref='arrow' class="iconfont icon-jiantou_down arrow"></i>
       </div>
       <!-- 顶部隐藏导航面板 -->
-      <slide-down>
-        <div class="navi-panel" v-show="showNaviPanel">
-          <div class="navi-panel-title">全部</div>
-          <div class="navi-panel-item-wrapper">
-            <div class="navi-panel-item"
-              v-for="(item, index) in naviBars"
-              :key="item.label"
+      <!-- <slide-down> -->
+      <div class="navi-panel" v-show="showNaviPanel">
+        <div class="navi-panel-title">全部</div>
+        <div class="navi-panel-item-wrapper">
+          <div class="navi-panel-item"
+            v-for="(item, index) in naviBars"
+            :key="item.label"
+          >
+            <div :class="inTabBarselectedLabel === item.label ?
+              'navi-panel-item-content navi-panel-item-active' :
+              'navi-panel-item-content'"
+              @click="onNaviClick(index)"
             >
-              <div :class="inTabBarselectedLabel === item.label ?
-                'navi-panel-item-content navi-panel-item-active' :
-                'navi-panel-item-content'"
-                @click="onNaviClick(index)"
-              >
-                {{item.label}}
-              </div>
+              {{item.label}}
             </div>
           </div>
         </div>
-      </slide-down>
+      </div>
+      <!-- </slide-down> -->
     </div>
     <!-- 导航关联的下部 slide 显示内容区 -->
-    <cube-slide
-      ref="slide"
-      :options="slideOptions"
-      :initial-index="initialIndex"
-      @change="changePage"
-      @scroll='scroll'
-      :autoPlay='false'
-      :loop='false'
-      :showDots='false'
-      class='content-page'
-    >
-      <cube-slide-item  v-for='(item, index) of compNames' :key='index'>
-        <cube-scroll :options="scrollOptions">
-          <slot :compName='item'></slot>
-        </cube-scroll>
-      </cube-slide-item>
-    </cube-slide>
+    <div class="content-page">
+      <cube-slide
+        ref="slide"
+        :options="slideOptions"
+        :initial-index="initialIndex"
+        @change="changePage"
+        @scroll='scroll'
+        :autoPlay='false'
+        :loop='false'
+        :showDots='false'
+        :data='compNames'
+      >
+        <cube-slide-item  v-for='(item, index) of compNames' :key='index'>
+          <cube-scroll :options="scrollOptions" >
+            <slot :compName='item'></slot>
+          </cube-scroll>
+        </cube-slide-item>
+      </cube-slide>
+    </div>
   </div>
 </template>
 <script>
-import SlideDown from 'common/transition/slide-down/SlideDown'
+// import SlideDown from 'common/transition/slide-down/SlideDown'
 import ShadeMask from 'common/ShadeMask'
 export default {
-  name: 'HomeHeader',
+  name: 'NaviHeader',
   props: {
     naviBars: {
       type: Array,
@@ -99,19 +101,20 @@ export default {
       showNaviPanel: false,
       inTabBarselectedLabel: this.tabBarselectedLabel,
       slideOptions: {
-        listenScroll: true,
-        probeType: 3,
+        // listenScroll: true,
+        // probeType: 3,
         /* lock y-direction when scrolling horizontally and  vertically at the same time */
-        directionLockThreshold: 0
+        // directionLockThreshold: 0
       },
       scrollOptions: {
         /* lock x-direction when scrolling horizontally and  vertically at the same time */
-        directionLockThreshold: 0
+        // directionLockThreshold: 0
       }
     }
   },
   components: {
-    SlideDown, ShadeMask
+    // SlideDown,
+    ShadeMask
   },
   computed: {
     initialIndex () {
@@ -151,7 +154,7 @@ export default {
       this.showMask = false
     },
     onSearch () {
-      this.$emit('hideBottomNavi')
+      this.$emit('onSearch')
     },
     scroll (pos) {
       // const x = Math.abs(pos.x)
@@ -164,7 +167,7 @@ export default {
 }
 </script>
 <style lang='stylus'>
-.home-header
+.navi-header
   z-index: 99
   position: fixed
   top: 0
@@ -255,6 +258,9 @@ export default {
           border: 1px solid #ff6700
           background: #fde0d5
 .content-page
-  margin-top: 1.5rem
-  margin-bottom: 1rem
+  position: absolute
+  top: 1.5rem
+  left: 0
+  right: 0
+  bottom: 1rem
 </style>
