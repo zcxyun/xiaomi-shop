@@ -13,7 +13,7 @@
             <span class="current-price">
               {{item.currentPrice}}<span class="hasHigher" v-if="item.hasHigherPrice">起</span>
             </span>
-            <!-- <span v-if="item.originalPrice" class="hasHigher">¥</span> -->
+            <span v-if="item.originalPrice" class="moneySign">¥</span>
             <span class="original-price" v-if='item.originalPrice'>{{item.originalPrice}}</span>
           </div>
           <div class="btn">{{item.btnText}}</div>
@@ -87,6 +87,8 @@ export default {
               font-size: .25rem
             .hasHigher
               font-size: .2rem
+          .moneySign
+            font-size: .2rem
           .original-price
             font-weight: 500
             font-size: .25rem
