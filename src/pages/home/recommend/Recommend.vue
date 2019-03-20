@@ -5,22 +5,27 @@
     <recommend-news :newsImgs='newsImgs'></recommend-news>
     <recommend-advert :img='advertImgs.redmi'></recommend-advert>
 
-    <recommend-products :products='phones'></recommend-products>
+    <recommend-category-title :topBannerImg='phones.topBannerImg'></recommend-category-title>
+    <recommend-products :productList='phones.productList'></recommend-products>
     <recommend-advert :img='advertImgs.weekend'></recommend-advert>
 
-    <recommend-products :products='televisions'></recommend-products>
+    <recommend-category-title :topBannerImg='televisions.topBannerImg'></recommend-category-title>
+    <recommend-products :productList='televisions.productList'></recommend-products>
     <recommend-hint-bar :hint='moreTVHint'></recommend-hint-bar>
     <recommend-advert :img='advertImgs.TV4A'></recommend-advert>
 
-    <recommend-products :products='notebooks'></recommend-products>
+    <recommend-category-title :topBannerImg='notebooks.topBannerImg'></recommend-category-title>
+    <recommend-products :productList='notebooks.productList'></recommend-products>
     <recommend-hint-bar :hint='moreNotebookHint'></recommend-hint-bar>
     <recommend-advert :img='advertImgs.phoneHeisha2'></recommend-advert>
 
-    <recommend-products :products='appliances'></recommend-products>
+    <recommend-category-title :topBannerImg='appliances.topBannerImg'></recommend-category-title>
+    <recommend-products :productList='appliances.productList'></recommend-products>
     <recommend-hint-bar :hint='moreApplianceHint'></recommend-hint-bar>
     <recommend-advert :img='advertImgs.notebookAir'></recommend-advert>
 
-    <recommend-products-odd :products='intelligences'></recommend-products-odd>
+    <recommend-category-title :topBannerImg='intelligences.topBannerImg'></recommend-category-title>
+    <recommend-products-odd :productList='intelligences.productList'></recommend-products-odd>
     <recommend-hint-bar :hint='moreIntelligenceHint'></recommend-hint-bar>
 
     <recommend-themes :imgs='themesImgs'></recommend-themes>
@@ -31,12 +36,13 @@
 </template>
 <script>
 import RecommendHeaderSwiper from 'common/HeaderSwiper'
-import RecommendAdvert from './components/Advert'
+import RecommendAdvert from 'common/Advert'
 import RecommendChannelIcons from 'common/ChannelIcons'
 import RecommendNews from './components/News'
 import RecommendProducts from 'common/products/TwoCol'
 import RecommendHintBar from './components/HintBar'
 import RecommendProductsOdd from 'common/products/Alternate'
+import RecommendCategoryTitle from './components/CategoryTitle'
 import RecommendThemes from './components/Themes'
 import HTTP from '@/utils/http.js'
 const http = new HTTP()
@@ -70,6 +76,7 @@ export default {
     RecommendProducts,
     RecommendHintBar,
     RecommendProductsOdd,
+    RecommendCategoryTitle,
     RecommendThemes
   },
   mounted () {

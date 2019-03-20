@@ -86,12 +86,7 @@ import ShadeMask from 'common/ShadeMask'
 export default {
   name: 'NaviHeader',
   props: {
-    naviBars: {
-      type: Array,
-      validator (value) {
-        return value.length
-      }
-    },
+    naviBars: Array,
     compNames: Array,
     tabBarselectedLabel: String
   },

@@ -1,12 +1,7 @@
 <template>
   <div class="ProductsAlternate">
-    <slot>
-      <div class="topBanner">
-        <img :src="products.topBannerImg" class="topBannerImg">
-      </div>
-    </slot>
     <div class="item-wrapper">
-      <div class="item" v-for="item of products.productList" :key='item.id'>
+      <div class="item" v-for="item of productList" :key='item.id'>
         <img :src="item.img" class="item-img">
         <div class="item-content">
           <div class="title">{{item.title}}</div>
@@ -27,7 +22,7 @@
 export default {
   name: 'ProductsAlternate',
   props: {
-    products: Object
+    productList: Array
   }
 }
 </script>
@@ -36,13 +31,6 @@ export default {
 .ProductsAlternate
   width: 100%
   background: #fff
-  .topBanner
-    width: 100%
-    height: 0
-    overflow: hidden
-    padding-bottom: 60%
-    .topBannerImg
-      width: 100%
   .item-wrapper
     margin-top: .05rem
     width: 100%

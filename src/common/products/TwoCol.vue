@@ -1,12 +1,7 @@
 <template>
   <div class="ProductsTwoCol">
-    <slot>
-      <div class="topBanner">
-        <img :src="products.topBannerImg" class="topBannerImg">
-      </div>
-    </slot>
     <div class="item-wrapper">
-      <div class="item" v-for="item of products.productList" :key='item.id'>
+      <div class="item" v-for="item of productList" :key='item.id'>
         <img :src="item.img" class="item-img">
         <div class="item-content">
           <div class="title">{{item.title}}</div>
@@ -15,7 +10,7 @@
             <span class="current-price">
               {{item.currentPrice}}<span class="hasHigher" v-if="item.hasHigherPrice">起</span>
             </span>
-            <span v-if="item.originalPrice">¥</span>
+            <span v-if="item.originalPrice" class="moneySign">¥</span>
             <span class="original-price" v-if='item.originalPrice'>{{item.originalPrice}}</span>
           </div>
         </div>
@@ -27,7 +22,7 @@
 export default {
   name: 'ProductsTwoCol',
   props: {
-    products: Object
+    productList: Array
   }
 }
 </script>
@@ -36,13 +31,6 @@ export default {
 .ProductsTwoCol
   width: 100%
   background: #fff
-  .topBanner
-    width: 100%
-    height: 0
-    overflow: hidden
-    padding-bottom: 60%
-    .topBannerImg
-      width: 100%
   .item-wrapper
     margin-top: .05rem
     width: 100%
@@ -69,26 +57,31 @@ export default {
           font-weight: 350
           ellipsis()
         .summary
-          color: #999
+          font-size: .2rem
+          color: #777
           line-height: .45rem
           ellipsis()
         .price
           margin-top: .07rem
           .current-price
-            font-size: .3rem
+            font-size: .28rem
+            font-weight: 500
             position: relative
             color: #ea625b
-            padding-left: .2rem
-            padding-right: .2rem
+            padding-left: .18rem
+            padding-right: .1rem
             &:before
               content: "¥"
               position: absolute
               left: 0
-              top: 0
-              font-size: .1rem
+              font-size: .2rem
             .hasHigher
-              font-size: .1rem
+              font-size: .2rem
+          .moneySign
+            font-size: .2rem
           .original-price
+            font-size: .25rem
+            font-weight: 500
             text-decoration: line-through
             color: rgba(0,0,0,.54)
 </style>

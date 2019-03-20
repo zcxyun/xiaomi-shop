@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-// import fix from './utils/fix'
+import fix from './utils/fix'
 // 使所有浏览器支持 promise
 import 'babel-polyfill'
 // 有些手机浏览器会出现 click 事件300毫秒延迟的问题，需要以下 fastclick 库
@@ -21,7 +21,7 @@ Vue.use(Cube)
 
 Vue.config.productionTip = false
 fastClick.attach(document.body)
-// fix()
+fix()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

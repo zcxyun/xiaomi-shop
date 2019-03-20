@@ -1,18 +1,18 @@
 <template>
-  <div class="hint-bar">
-    <span class="text">{{hintText}}</span>
+  <div class="container">
+    <span class="text">{{title}}</span>
   </div>
 </template>
 <script>
 export default {
-  name: 'PhoneHintBar',
+  name: 'PhoneCategoryTitle',
   props: {
-    hintText: String
+    title: String
   }
 }
 </script>
 <style lang='stylus' scoped>
-.hint-bar
+.container
   width: 100%
   background: rgb(231, 230, 252)
   text-align: center
