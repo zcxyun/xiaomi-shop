@@ -25,6 +25,7 @@ export default {
 </script>
 <style lang='stylus' scoped>
 .news
+  margin-top: .18rem
   background: #fff
   .news-top
     display: flex

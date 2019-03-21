@@ -25,11 +25,10 @@ export default {
 <style lang='stylus' scoped>
 .channel-icons
   overflow: hidden
-  height: 0
+  // height: 0
   width: 100%
-  padding-bottom: 20%
+  // padding-bottom: 23%
   display: flex
-  margin-bottom: .2rem
   .icon
     width: 20%
     .icon-img

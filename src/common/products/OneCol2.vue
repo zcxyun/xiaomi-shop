@@ -35,9 +35,9 @@ export default {
 <style lang='stylus' scoped>
 @import '~styles/mixins.styl'
 .products-one-col2
-  background: #ffffff
-  margin: 0 0.1rem
+  margin: 0 0.12rem
   .products
+    background: #ffffff
     height: 0
     width: 100%
     overflow: hidden

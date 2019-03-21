@@ -56,9 +56,9 @@ export default {
         'HomePhone',
         'HomeIntelligence',
         'HomeTelevision',
+        'HomeAppliance',
         'HomeNotebook',
-        'HomeLife',
-        'HomeAppliance'
+        'HomeLife'
       ]
     }
   },
