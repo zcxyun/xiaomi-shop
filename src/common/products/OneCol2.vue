@@ -25,6 +25,9 @@
   </div>
 </template>
 <script>
+/**
+ * 带 立即购买或立即预约 按钮 单列显示产品的组件
+ */
 export default {
   name: 'ProductsOneCol2',
   props: {

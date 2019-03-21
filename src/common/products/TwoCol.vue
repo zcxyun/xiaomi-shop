@@ -20,6 +20,9 @@
   </div>
 </template>
 <script>
+/**
+ * 不带 立即购买或立即预约 按钮 双列显示产品的组件
+ */
 export default {
   name: 'ProductsTwoCol',
   props: {

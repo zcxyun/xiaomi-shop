@@ -2,9 +2,10 @@
   <div>
     <navi-header
       :naviBars='naviBars'
-      @onSearch='hideBottomNavi'
       :compNames='compNames'
       :tabBarselectedLabel='tabBarselectedLabel'
+      @onSearch='hideBottomNavi'
+      @onTabChange='onTabChange'
     >
       <template #default='{compName}'>
         <component :is='compName'></component>
@@ -51,15 +52,35 @@ export default {
       }],
       tabBarselectedLabel: '推荐',
       showBottomNavi: true,
-      compNames: [
-        'HomeRecommend',
-        'HomePhone',
-        'HomeIntelligence',
-        'HomeTelevision',
-        'HomeAppliance',
-        'HomeNotebook',
-        'HomeLife'
-      ]
+      compNames: [{
+        naviLabel: '推荐',
+        compName: 'HomeRecommend',
+        isShow: true
+      }, {
+        naviLabel: '手机',
+        compName: 'HomePhone',
+        isShow: false
+      }, {
+        naviLabel: '智能',
+        compName: 'HomeIntelligence',
+        isShow: false
+      }, {
+        naviLabel: '电视',
+        compName: 'HomeTelevision',
+        isShow: false
+      }, {
+        naviLabel: '家电',
+        compName: 'HomeAppliance',
+        isShow: false
+      }, {
+        naviLabel: '笔记本',
+        compName: 'HomeNotebook',
+        isShow: false
+      }, {
+        naviLabel: '生活周边',
+        compName: 'HomeLife',
+        isShow: false
+      }]
     }
   },
   computed: {
@@ -67,6 +88,12 @@ export default {
   methods: {
     hideBottomNavi () {
       this.showBottomNavi = !this.showBottomNavi
+    },
+    onTabChange (label) {
+      const comp = this.compNames.find(item => {
+        return item.naviLabel === label
+      })
+      comp.isShow = true
     },
     getHomeInfoSucc (res) {
       this.naviBars = res.naviBars

@@ -71,9 +71,9 @@
         :showDots='false'
         :data='compNames'
       >
-        <cube-slide-item  v-for='(item, index) of compNames' :key='index'>
-          <cube-scroll :options="scrollOptions" >
-            <slot :compName='item'></slot>
+        <cube-slide-item  v-for='item of compNames' :key='item.compName'>
+          <cube-scroll :options="scrollOptions" v-if="item.isShow">
+            <slot :compName='item.compName'></slot>
           </cube-scroll>
         </cube-slide-item>
       </cube-slide>
@@ -132,6 +132,7 @@ export default {
     onTabChange (label) {
       const element = this.$refs[label][0].$el
       this.$refs.scroll.scroll.scrollToElement(element, 1000, true)
+      this.$emit('onTabChange', label)
     },
     changePage (current) {
       this.inTabBarselectedLabel = this.naviBars[current].label
