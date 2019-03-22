@@ -65,23 +65,33 @@
         :options="slideOptions"
         :initial-index="initialIndex"
         @change="changePage"
-        @scroll='scroll'
+        @scroll='slideScroll'
         :autoPlay='false'
         :loop='false'
         :showDots='false'
         :data='compNames'
       >
         <cube-slide-item  v-for='item of compNames' :key='item.compName'>
-          <cube-scroll :options="scrollOptions" v-if="item.isShow">
+          <cube-scroll
+            :options="scrollOptions"
+            v-if="item.isShow"
+            :ref='item.naviLabel'
+            :scroll-events="['scroll']"
+            @scroll='contentPageScroll'
+          >
             <slot :compName='item.compName'></slot>
           </cube-scroll>
         </cube-slide-item>
       </cube-slide>
     </div>
+
+    <to-top @click.native='onToTop' v-show="showToTop"></to-top>
+
   </div>
 </template>
 <script>
 // import SlideDown from 'common/transition/slide-down/SlideDown'
+import ToTop from 'common/ToTop'
 import ShadeMask from 'common/ShadeMask'
 export default {
   name: 'NaviHeader',
@@ -92,6 +102,7 @@ export default {
   },
   data () {
     return {
+      showToTop: false,
       showMask: false,
       showNaviPanel: false,
       inTabBarselectedLabel: this.tabBarselectedLabel,
@@ -104,12 +115,14 @@ export default {
       scrollOptions: {
         /* lock x-direction when scrolling horizontally and  vertically at the same time */
         // directionLockThreshold: 0
+        // probeType: 1
       }
     }
   },
   components: {
     // SlideDown,
-    ShadeMask
+    ShadeMask,
+    ToTop
   },
   computed: {
     initialIndex () {
@@ -152,7 +165,13 @@ export default {
     onSearch () {
       this.$emit('onSearch')
     },
-    scroll (pos) {
+    onToTop () {
+      this.$refs[this.inTabBarselectedLabel][1].scrollTo(0, 0, 1000)
+    },
+    contentPageScroll ({x, y}) {
+      this.showToTop = y < -800
+    },
+    slideScroll (pos) {
       // const x = Math.abs(pos.x)
       // const tabItemWidth = this.$refs.tabNav.$el.clientWidth
       // const slideScrollerWidth = this.$refs.slide.slide.scrollerWidth
