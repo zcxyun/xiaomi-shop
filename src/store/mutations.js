@@ -4,5 +4,8 @@ export default {
     try {
       localStorage.city = city
     } catch (error) { }
+  },
+  changeSelectedNavi (state, newNavi) {
+    state.selectedNavi = newNavi
   }
 }

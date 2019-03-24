@@ -4,5 +4,6 @@ try {
 } catch (error) { }
 
 export default {
-  city: defaultCity
+  city: defaultCity,
+  selectedNavi: '首页'
 }

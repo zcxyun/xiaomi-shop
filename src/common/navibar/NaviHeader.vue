@@ -14,7 +14,7 @@
       </div>
       <!-- 顶部 scroll-tab-bar 导航栏 -->
       <cube-scroll
-        ref="scroll"
+        ref="naviBarScroll"
         direction="horizontal"
         v-show="!showNaviPanel"
       >
@@ -28,7 +28,7 @@
             v-for="item in naviBars"
             :label="item.label"
             :key="item.label"
-            :ref='item.label'
+            :ref='"tabNav"+item.label'
           >
           </cube-tab>
         </cube-tab-bar>
@@ -61,7 +61,7 @@
     <!-- 导航关联的下部 slide 显示内容区 -->
     <div class="content-page">
       <cube-slide
-        ref="slide"
+        ref="contentPageSlide"
         :options="slideOptions"
         :initial-index="initialIndex"
         @change="changePage"
@@ -74,12 +74,11 @@
         <cube-slide-item  v-for='item of compNames' :key='item.compName'>
           <cube-scroll
             :options="scrollOptions"
-            v-if="item.isShow"
-            :ref='item.naviLabel'
+            :ref='"contentPage"+item.naviLabel'
             :scroll-events="['scroll']"
             @scroll='contentPageScroll'
           >
-            <slot :compName='item.compName'></slot>
+            <slot :compName='item.compName' v-if="item.isShow"></slot>
           </cube-scroll>
         </cube-slide-item>
       </cube-slide>
@@ -143,16 +142,17 @@ export default {
       this.changePage(current)
     },
     onTabChange (label) {
-      const element = this.$refs[label][0].$el
-      this.$refs.scroll.scroll.scrollToElement(element, 1000, true)
+      const element = this.$refs['tabNav' + label][0].$el
+      this.$refs.naviBarScroll.scroll.scrollToElement(element, 1000, true)
       this.$emit('onTabChange', label)
     },
     changePage (current) {
       this.inTabBarselectedLabel = this.naviBars[current].label
-      // 此处不明白为什么要加计时器才能触发导航条滚动
-      setTimeout(() => {
+      const contentPageRef = this.$refs['contentPage' + this.inTabBarselectedLabel][0]
+      this.showToTop = contentPageRef.scroll.y < -800
+      this.$nextTick(() => {
         this.onTabChange(this.inTabBarselectedLabel)
-      }, 10)
+      })
     },
     onShadeMaskClick () {
       this.initNaviData()
@@ -166,7 +166,7 @@ export default {
       this.$emit('onSearch')
     },
     onToTop () {
-      this.$refs[this.inTabBarselectedLabel][1].scrollTo(0, 0, 1000)
+      this.$refs['contentPage' + this.inTabBarselectedLabel][0].scrollTo(0, 0, 1000)
     },
     contentPageScroll ({x, y}) {
       this.showToTop = y < -800
