@@ -1,20 +1,32 @@
 <template>
-  <div class="navibar">
-    <i class="iconfont icon-fanhui"></i>
-    <div class="category-title">{{title}}</div>
-    <i class="iconfont icon-sousuo"></i>
-  </div>
+  <transition>
+    <div class="title-bar">
+      <i class="iconfont icon-fanhui" @click="onGoBack"></i>
+      <div class="category-title">{{title}}</div>
+      <i class="iconfont icon-sousuo"></i>
+    </div>
+  </transition>
 </template>
 <script>
 export default {
-  name: 'Navibar',
+  name: 'TitleBar',
   props: {
     title: String
+  },
+  methods: {
+    onGoBack () {
+      this.$router.go(-1)
+    }
   }
 }
 </script>
 <style lang='stylus' scoped>
-.navibar
+.v-enter, .v-leave-to
+  transform: translateY(-1rem)
+.v-enter-active, .v-leave-active
+  transition: transform .5s
+
+.title-bar
   position: fixed
   top: 0
   left: 0
@@ -25,6 +37,7 @@ export default {
   background: #f2f2f2
   text-align: center
   color: #888
+  z-index: 99
   .icon-fanhui
     width: 1rem
     height: 1rem

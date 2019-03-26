@@ -1,6 +1,6 @@
 <template>
   <div class="category-container">
-    <navibar :title="naviTitle"></navibar>
+    <title-bar :title="naviTitle" v-if="showTitleBar"></title-bar>
     <cube-scroll-nav
       :side="true"
       :data="datas"
@@ -32,13 +32,14 @@
         </ul>
       </cube-scroll-nav-panel>
     </cube-scroll-nav>
-    <bottom-navi-bar></bottom-navi-bar>
+    <bottom-navi-bar ></bottom-navi-bar>
   </div>
 </template>
 <script>
 import HTTP from '@/utils/http.js'
-import Navibar from './components/Navibar'
+import TitleBar from 'common/navibar/TitleBar'
 import BottomNaviBar from 'common/navibar/BottomNaviBar'
+import {mapMutations} from 'vuex'
 
 const http = new HTTP()
 
@@ -47,12 +48,13 @@ export default {
   data () {
     return {
       datas: [],
-      naviTitle: '分类'
+      naviTitle: '分类',
+      showTitleBar: false
     }
   },
   components: {
     BottomNaviBar,
-    Navibar
+    TitleBar
   },
   computed: {
     current () {
@@ -60,6 +62,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['changeSelectedNavi']),
     changeHandler (label) {
     },
     stickyChangeHandler (current) {
@@ -70,9 +73,18 @@ export default {
     }
   },
   mounted () {
+    this.changeSelectedNavi('分类')
+    this.showTitleBar = true
     http.request({
       url: '/api/category.json'
     }).then(this.handleGetCateSucc)
+  },
+  activated () {
+    this.changeSelectedNavi('分类')
+    this.showTitleBar = true
+  },
+  deactivated () {
+    this.showTitleBar = false
   }
 }
 </script>

@@ -26,6 +26,8 @@ import HomeRecommend from './recommend/Recommend'
 import HomeTelevision from './television/Television'
 import BottomNaviBar from 'common/navibar/BottomNaviBar'
 
+import {mapMutations} from 'vuex'
+
 const http = new HTTP()
 export default {
   name: 'Home',
@@ -86,6 +88,7 @@ export default {
   computed: {
   },
   methods: {
+    ...mapMutations(['changeSelectedNavi']),
     hideBottomNavi () {
       this.showBottomNavi = !this.showBottomNavi
     },
@@ -100,9 +103,13 @@ export default {
     }
   },
   mounted () {
+    this.changeSelectedNavi('首页')
     http.request({
       url: '/api/home.json'
     }).then(this.getHomeInfoSucc)
+  },
+  activated () {
+    this.changeSelectedNavi('首页')
   }
 }
 </script>
