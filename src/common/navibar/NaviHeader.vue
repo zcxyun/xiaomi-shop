@@ -277,5 +277,5 @@ export default {
   top: 1.5rem
   left: 0
   right: 0
-  bottom: 1rem
+  bottom: 0
 </style>

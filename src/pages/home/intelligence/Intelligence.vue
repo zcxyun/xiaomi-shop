@@ -1,5 +1,5 @@
 <template>
-  <div class='container'>
+  <div class='intelligence'>
     <intelligence-swiper :headerSwiperImgs="headerSwiperImgs"></intelligence-swiper>
     <intelli-channel-icons :channelIcons='channelIcons'></intelli-channel-icons>
 
@@ -51,7 +51,7 @@ export default {
 }
 </script>
 <style lang='stylus' scoped>
-.container
+.intelligence
   background: #9721f1
-  padding-bottom: .1rem
+  padding-bottom: 1.1rem
 </style>

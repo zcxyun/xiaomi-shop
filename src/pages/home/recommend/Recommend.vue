@@ -103,5 +103,5 @@ export default {
 <style lang='stylus' scoped>
 .recommend
   background: rgb(245, 245, 245)
-  padding-bottom: .1rem
+  padding-bottom: 1.1rem
 </style>

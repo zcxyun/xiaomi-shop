@@ -4,7 +4,7 @@
       :naviBars='naviBars'
       :compNames='compNames'
       :tabBarselectedLabel='tabBarselectedLabel'
-      @onSearch='hideBottomNavi'
+      @onSearch='onSearch'
       @onTabChange='onTabChange'
     >
       <template #default='{compName}'>
@@ -89,8 +89,9 @@ export default {
   },
   methods: {
     ...mapMutations(['changeSelectedNavi']),
-    hideBottomNavi () {
-      this.showBottomNavi = !this.showBottomNavi
+    onSearch () {
+      this.showBottomNavi = false
+      this.$router.push('/search')
     },
     onTabChange (label) {
       const comp = this.compNames.find(item => {
@@ -103,13 +104,17 @@ export default {
     }
   },
   mounted () {
+    this.showBottomNavi = true
     this.changeSelectedNavi('首页')
     http.request({
       url: '/api/home.json'
     }).then(this.getHomeInfoSucc)
   },
   activated () {
+    this.showBottomNavi = true
     this.changeSelectedNavi('首页')
+  },
+  deactivated () {
   }
 }
 </script>

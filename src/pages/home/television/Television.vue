@@ -1,5 +1,5 @@
 <template>
-  <div class='container'>
+  <div class='television'>
     <div class="headerImgWrapper">
       <img :src="headerImg" class="headerImg">
     </div>
@@ -45,7 +45,8 @@ export default {
 }
 </script>
 <style lang='stylus' scoped>
-.container
+.television
+  padding-bottom: 1rem
   background: rgb(150, 26, 41)
   .headerImgWrapper
     .headerImg

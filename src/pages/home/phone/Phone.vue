@@ -100,5 +100,5 @@ export default {
 <style lang='stylus' scoped>
 .phone
   background: rgb(231, 230, 252)
-  padding-bottom: .1rem
+  padding-bottom: 1.1rem
 </style>

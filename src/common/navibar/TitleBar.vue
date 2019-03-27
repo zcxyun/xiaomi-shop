@@ -3,7 +3,7 @@
     <div class="title-bar">
       <i class="iconfont icon-fanhui" @click="onGoBack"></i>
       <div class="category-title">{{title}}</div>
-      <i class="iconfont icon-sousuo"></i>
+      <i class="iconfont icon-sousuo" @click="onSearch"></i>
     </div>
   </transition>
 </template>
@@ -16,6 +16,9 @@ export default {
   methods: {
     onGoBack () {
       this.$router.go(-1)
+    },
+    onSearch () {
+      this.$emit('onSearch')
     }
   }
 }

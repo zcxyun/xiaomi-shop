@@ -1,6 +1,6 @@
 <template>
   <div class="category-container">
-    <title-bar :title="naviTitle" v-if="showTitleBar"></title-bar>
+    <title-bar :title="naviTitle" v-if="showTitleBar" @onSearch='onSearch'></title-bar>
     <cube-scroll-nav
       :side="true"
       :data="datas"
@@ -32,7 +32,7 @@
         </ul>
       </cube-scroll-nav-panel>
     </cube-scroll-nav>
-    <bottom-navi-bar ></bottom-navi-bar>
+    <bottom-navi-bar v-show="showBottomNavi"></bottom-navi-bar>
   </div>
 </template>
 <script>
@@ -49,7 +49,8 @@ export default {
     return {
       datas: [],
       naviTitle: '分类',
-      showTitleBar: false
+      showTitleBar: false,
+      showBottomNavi: true
     }
   },
   components: {
@@ -70,6 +71,10 @@ export default {
     handleGetCateSucc (res) {
       this.datas = res.data
       this.$refs.scrollNav.refresh()
+    },
+    onSearch () {
+      this.showBottomNavi = false
+      this.$router.push('/search')
     }
   },
   mounted () {
@@ -80,6 +85,7 @@ export default {
     }).then(this.handleGetCateSucc)
   },
   activated () {
+    this.showBottomNavi = true
     this.changeSelectedNavi('分类')
     this.showTitleBar = true
   },

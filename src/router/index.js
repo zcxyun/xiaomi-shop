@@ -6,6 +6,7 @@ import Cart from '@/pages/cart/Cart'
 import Me from '@/pages/me/Me'
 import Test from '@/pages/test/Test'
 import scrollNav from '@/pages/test/scrollNav'
+import Search from '@/pages/search/Search'
 
 Vue.use(Router)
 
@@ -26,6 +27,10 @@ export default new Router({
     path: '/me',
     name: 'me',
     component: Me
+  }, {
+    path: '/search',
+    name: 'search',
+    component: Search
   }, {
     path: '/test',
     name: 'test',
