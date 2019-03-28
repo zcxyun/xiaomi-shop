@@ -5,7 +5,13 @@ export default {
       localStorage.city = city
     } catch (error) { }
   },
-  changeSelectedNavi (state, newNavi) {
-    state.selectedNavi = newNavi
+  changeShowTitleBar (state, isShow) {
+    state.showTitleBar = isShow
+  },
+  changeShowBottomNaviBar (state, isShow) {
+    state.showBottomNaviBar = isShow
+  },
+  changeTitle (state, newTitle) {
+    state.title = newTitle
   }
 }

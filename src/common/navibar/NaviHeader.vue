@@ -182,6 +182,7 @@ export default {
 }
 </script>
 <style lang='stylus'>
+@import '~styles/varibles.styl'
 .navi-header
   z-index: 99
   position: fixed
@@ -189,7 +190,7 @@ export default {
   left: 0
   right: 0
   box-shadow: 0 2px 4px -1px rgba(0,0,0,.2)
-  background: #f2f2f2
+  background: $headerBarBgColor
   .header
     width: 100%
     display: flex

@@ -1,6 +1,5 @@
 <template>
-  <div class="category-container">
-    <title-bar :title="naviTitle" v-if="showTitleBar" @onSearch='onSearch'></title-bar>
+  <div class="category">
     <cube-scroll-nav
       :side="true"
       :data="datas"
@@ -32,7 +31,6 @@
         </ul>
       </cube-scroll-nav-panel>
     </cube-scroll-nav>
-    <bottom-navi-bar v-show="showBottomNavi"></bottom-navi-bar>
   </div>
 </template>
 <script>
@@ -63,7 +61,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['changeSelectedNavi']),
+    ...mapMutations(['changeTitle', 'changeShowTitleBar', 'changeShowBottomNaviBar']),
     changeHandler (label) {
     },
     stickyChangeHandler (current) {
@@ -72,52 +70,47 @@ export default {
       this.datas = res.data
       this.$refs.scrollNav.refresh()
     },
-    onSearch () {
-      this.showBottomNavi = false
-      this.$router.push('/search')
+    changeShowHeaderFooter () {
+      this.changeShowTitleBar(true)
+      this.changeShowBottomNaviBar(true)
+      this.changeTitle('分类')
     }
   },
   mounted () {
-    this.changeSelectedNavi('分类')
-    this.showTitleBar = true
+    this.changeShowHeaderFooter()
     http.request({
       url: '/api/category.json'
     }).then(this.handleGetCateSucc)
   },
   activated () {
-    this.showBottomNavi = true
-    this.changeSelectedNavi('分类')
-    this.showTitleBar = true
-  },
-  deactivated () {
-    this.showTitleBar = false
+    this.changeShowHeaderFooter()
   }
 }
 </script>
 <style lang='stylus' scoped>
 @import '~styles/mixins.styl'
-.category-container >>> .cube-scroll-nav-panel-title
+.category >>> .cube-scroll-nav-panel-title
   font-size: 0rem
-.category-container >>> .cube-scroll-nav-main
+.category >>> .cube-scroll-nav-main
   background-color: #fff
-.category-container >>> .cube-sticky-fixed
+.category >>> .cube-sticky-fixed
   background-color: #fff
-.category-container >>> .cube-scroll-nav
+.category >>> .cube-scroll-nav
   height: unset
-.category-container >>> .cube-scroll-nav-bar
+.category >>> .cube-scroll-nav-bar
   padding-top: .3rem
   width: 1.5rem
   border-right: .01rem solid #eee
-.category-container >>> .cube-scroll-nav-bar-item
+.category >>> .cube-scroll-nav-bar-item
   font-size: .27rem
   padding: .3rem
-.category-container >>> .cube-scroll-nav-bar-item_active
+.category >>> .cube-scroll-nav-bar-item_active
   font-size: .35rem
   transition: all .2s
-.category-container >>> .cube-scroll-nav-panels
+.category >>> .cube-scroll-nav-panels
   background-color: #fff
   padding: 0 .35rem
-.category-container
+.category
   .scrollNav
     position: absolute
     top: 1rem

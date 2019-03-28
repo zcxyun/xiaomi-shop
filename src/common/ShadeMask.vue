@@ -11,7 +11,7 @@ export default {
 </script>
 <style lang='stylus' scoped>
 .mask
-  z-index: 90
+  z-index: 10
   position: fixed
   top: 0
   left: 0

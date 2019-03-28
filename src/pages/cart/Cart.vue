@@ -1,6 +1,5 @@
 <template>
   <div class="cart">
-    <title-bar :title="cartTitle" v-if="showTitleBar" @onSearch='onSearch'></title-bar>
     <div class="login">
       <div class="left">登录后享受更多优惠</div>
       <div class="right">
@@ -17,7 +16,6 @@
       <img src="//i8.mifile.cn/b2c-mimall-media/e95ade2750a7fde92369b416c7d3176d.jpg" class="like-img">
     </div>
     <product-two-col :productList='productList'></product-two-col>
-    <bottom-navi-bar v-show="showBottomNavi"></bottom-navi-bar>
   </div>
 </template>
 <script>
@@ -44,7 +42,7 @@ export default {
     ProductTwoCol
   },
   methods: {
-    ...mapMutations(['changeSelectedNavi']),
+    ...mapMutations(['changeTitle', 'changeShowTitleBar', 'changeShowBottomNaviBar']),
     getLikeProductsInfo () {
       http.request({
         url: '/api/guessYouLike.json'
@@ -53,24 +51,18 @@ export default {
     handleGetYouLikeSucc (res) {
       this.productList = res.productList
     },
-    onSearch () {
-      this.showBottomNavi = false
-      this.$router.push('/search')
+    changeShowHeaderFooter () {
+      this.changeShowTitleBar(true)
+      this.changeShowBottomNaviBar(true)
+      this.changeTitle('购物车')
     }
   },
   mounted () {
-    this.showBottomNavi = true
-    this.showTitleBar = true
-    this.changeSelectedNavi('购物车')
+    this.changeShowHeaderFooter()
     this.getLikeProductsInfo()
   },
   activated () {
-    this.showBottomNavi = true
-    this.showTitleBar = true
-    this.changeSelectedNavi('购物车')
-  },
-  deactivated () {
-    this.showTitleBar = false
+    this.changeShowHeaderFooter()
   }
 }
 </script>

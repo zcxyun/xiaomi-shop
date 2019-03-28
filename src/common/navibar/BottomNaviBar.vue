@@ -1,6 +1,6 @@
 <template>
   <transition>
-    <div class="container">
+    <div class="footer">
       <div class="navi-item" v-for="item of navis" :key="item.label" @click="onNavi(item.label, item.path)">
           <img :src="selectedNavi === item.label ? item.imgActive : item.img" class="navi-item-img">
           <div :class="selectedNavi === item.label ? 'navi-item-text-active' : 'navi-item-text'">
@@ -11,11 +11,11 @@
   </transition>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'BottomNaviBar',
   data () {
     return {
+      selectedNavi: '首页',
       navis: [{
         label: '首页',
         img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAAAk1BMVEUAAABxcXFxcXFwcHBxcXFwcHBvb29wcHBwcHBxcXFvb29wcHBubm5vb29vb29wcHBwcHBvb29wcHBwcHBwcHBvb29wcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBycnJwcHBwcHBwcHBvb29wcHBwcHBwcHBwcHBvb29vb29wcHBwcHBwcHBubm5wcHB0dHRycnJ2dnY0KzjsAAAALnRSTlMAAgn0mv6+6cEcQdIlEg36rTcy5E0g7tXFu6GPhmwG3Kl4KbSTc1xXR8p/Zyxhwd65kwAAAr1JREFUSMftlumSojAUhYEYQemwg7K4r63dOXn/p5ubbqoVcByw5tfUnNLKMfB5b05AMZ7JJBkv6gt8mRZhKF6ta552uxMNr7DLi82YfVmSHcyKEYeU4CMxkKaQ0wDgQcCBIKXPg2KO5hJ+6XmlD8wjmhrAJjOAHUzyBwbMEjK92U8bsI9kyR+1/yTfc4s2utpZW/066y42NN2H9fb8e521aP0A9l6X7sY8WeuYU/I/q0h16OvJn0OPHGIbZcgK3YwTPQXrBfr6qmrFcPHrGJ6wxxjIrmQ7R64ZEB/JPo15lZB9tPWrJ6FTzGUrZq1m6LzUaXRRipnY4JZpdx8Coin0B/jHGMDIexaJNwIw/ujWnboAr9oxt0JfVhxwp2Qb7EnHvLifNWu8ed5Ch34iez/HwFdJh/1d6D9VaLAqH9wNW81sF0VQHKL25oRzDr+y9Kx+i4Jzjl2zrneJfamUb+8nrRTCjE4vxPfp2xwadqxGsAWX0me+lMjTZuepDQ7k2682XAl7xyTB5q3nEuD54XQNGGRgNXp6s8EYl25IPTsK7BhmTThh8EtB1jqQu7Zg6W5iqLEwxE6tTsb0vjJFVChemN/7VHE1pkunAb+Lc6x2QocaGm347V3Z0zrPj5VahS14NjHCxbaeaMNRTF9eeyuQWdKC3cntTuzAYSznXl3ZXEvWhfWBmm7D25mMoxpOXRVPH8G1OrC1VrysL+wDV3oJfWEajxzs+uWTGHxjmENgXZoVyfa8t7lyqHB/mEzqKIDZDFCz0BgEk9JRBiklWEDJDYPJLqdVPs/LxKNPA2HtTTERehgM179fNToY1jjJ6A939R/+B+EeegyPlz2fD9MujLkwrR7yjCiTswYc2TJz8nEf5e++dMQ9vByBS9VHUknOW08BaQDZV/rfuamwGvXVJu2EOETdu3yAjL+gX1S9Wc5duViwAAAAAElFTkSuQmCC',
@@ -39,13 +39,9 @@ export default {
       }]
     }
   },
-  computed: {
-    ...mapState(['selectedNavi'])
-  },
   methods: {
-    ...mapMutations(['changeSelectedNavi']),
     onNavi (label, path) {
-      // this.changeSelectedNavi(label)
+      this.selectedNavi = label
       this.$router.push(path)
     }
   }
@@ -56,7 +52,7 @@ export default {
   transform: translateY(2rem)
 .v-enter-active, .v-leave-active
   transition: transform .5s
-.container
+.footer
   box-shadow: 0 3px 14px 2px rgba(0,0,0,.12)
   position: fixed
   z-index: 99

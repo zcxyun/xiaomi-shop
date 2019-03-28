@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <div class="me">
-      <cube-scroll>
-        <me-login-register :loginBg='loginBg' :avatarImg='avatarImg'></me-login-register>
-        <me-my-order :orderIcons='orderIcons'></me-my-order>
-        <ui-line></ui-line>
-        <me-menu :menus='menus1'></me-menu>
-        <ui-line></ui-line>
-        <me-menu :menus='menus2'></me-menu>
-        <ui-line></ui-line>
-        <me-menu :menus='menus3'></me-menu>
-        <ui-line></ui-line>
-        <me-menu :menus='menus4'></me-menu>
-        <ui-line></ui-line>
-      </cube-scroll>
-    </div>
-    <bottom-navi-bar></bottom-navi-bar>
+  <div class="me">
+    <cube-scroll>
+      <me-login-register :loginBg='loginBg' :avatarImg='avatarImg'></me-login-register>
+      <me-my-order :orderIcons='orderIcons'></me-my-order>
+      <ui-line></ui-line>
+      <me-menu :menus='menus1'></me-menu>
+      <ui-line></ui-line>
+      <me-menu :menus='menus2'></me-menu>
+      <ui-line></ui-line>
+      <me-menu :menus='menus3'></me-menu>
+      <ui-line></ui-line>
+      <me-menu :menus='menus4'></me-menu>
+      <ui-line></ui-line>
+    </cube-scroll>
   </div>
 </template>
 <script>
+import TitleBar from 'common/navibar/TitleBar'
 import MeLoginRegister from './components/LoginRegister'
 import MeMyOrder from './components/MyOrder'
 import UiLine from './components/UiLine'
@@ -30,6 +28,9 @@ export default {
   name: 'Me',
   data () {
     return {
+      title: '我的',
+      showTitleBar: false,
+      showBottomNavi: true,
       loginBg: '/img/me@loginBg.png',
       avatarImg: '/img/me@avatar.png',
       menus1: [{
@@ -82,6 +83,7 @@ export default {
     }
   },
   components: {
+    TitleBar,
     BottomNaviBar,
     MeLoginRegister,
     MeMyOrder,
@@ -89,13 +91,17 @@ export default {
     MeMenu
   },
   methods: {
-    ...mapMutations(['changeSelectedNavi'])
+    ...mapMutations(['changeShowTitleBar', 'changeShowBottomNaviBar']),
+    changeShowHeaderFooter () {
+      this.changeShowTitleBar(false)
+      this.changeShowBottomNaviBar(true)
+    }
   },
   mounted () {
-    this.changeSelectedNavi('我的')
+    this.changeShowHeaderFooter()
   },
   activated () {
-    this.changeSelectedNavi('我的')
+    this.changeShowHeaderFooter()
   }
 }
 </script>

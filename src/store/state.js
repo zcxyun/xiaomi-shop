@@ -5,5 +5,7 @@ try {
 
 export default {
   city: defaultCity,
-  selectedNavi: '首页'
+  title: '',
+  showTitleBar: false,
+  showBottomNaviBar: true
 }

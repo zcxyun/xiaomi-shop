@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="Home">
     <navi-header
       :naviBars='naviBars'
       :compNames='compNames'
@@ -11,11 +11,11 @@
         <component :is='compName'></component>
       </template>
     </navi-header>
-    <bottom-navi-bar v-show="showBottomNavi"></bottom-navi-bar>
   </div>
 </template>
 <script>
 import HTTP from '@/utils/http.js'
+import TitleBar from 'common/navibar/TitleBar'
 import NaviHeader from 'common/navibar/NaviHeader'
 import HomeAppliance from './appliance/Appliance'
 import HomeIntelligence from './intelligence/Intelligence'
@@ -32,6 +32,7 @@ const http = new HTTP()
 export default {
   name: 'Home',
   components: {
+    TitleBar,
     NaviHeader,
     HomeAppliance,
     HomeIntelligence,
@@ -52,8 +53,10 @@ export default {
       naviBars: [{
         label: '推荐'
       }],
-      tabBarselectedLabel: '推荐',
+      title: '首页',
+      showTitleBar: true,
       showBottomNavi: true,
+      tabBarselectedLabel: '推荐',
       compNames: [{
         naviLabel: '推荐',
         compName: 'HomeRecommend',
@@ -88,11 +91,7 @@ export default {
   computed: {
   },
   methods: {
-    ...mapMutations(['changeSelectedNavi']),
-    onSearch () {
-      this.showBottomNavi = false
-      this.$router.push('/search')
-    },
+    ...mapMutations(['changeShowTitleBar', 'changeShowBottomNaviBar']),
     onTabChange (label) {
       const comp = this.compNames.find(item => {
         return item.naviLabel === label
@@ -101,20 +100,23 @@ export default {
     },
     getHomeInfoSucc (res) {
       this.naviBars = res.naviBars
+    },
+    changeShowHeaderFooter () {
+      this.changeShowTitleBar(false)
+      this.changeShowBottomNaviBar(true)
+    },
+    onSearch () {
+      this.$router.push('/search')
     }
   },
   mounted () {
-    this.showBottomNavi = true
-    this.changeSelectedNavi('首页')
+    this.changeShowHeaderFooter()
     http.request({
       url: '/api/home.json'
     }).then(this.getHomeInfoSucc)
   },
   activated () {
-    this.showBottomNavi = true
-    this.changeSelectedNavi('首页')
-  },
-  deactivated () {
+    this.changeShowHeaderFooter()
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <transition>
-    <div class="title-bar">
+    <div class="header">
       <i class="iconfont icon-fanhui" @click="onGoBack"></i>
       <div class="category-title">{{title}}</div>
       <i class="iconfont icon-sousuo" @click="onSearch"></i>
@@ -18,18 +18,20 @@ export default {
       this.$router.go(-1)
     },
     onSearch () {
-      this.$emit('onSearch')
+      this.$router.push('/search')
     }
   }
 }
 </script>
 <style lang='stylus' scoped>
+@import '~styles/varibles.styl'
+
 .v-enter, .v-leave-to
   transform: translateY(-1rem)
 .v-enter-active, .v-leave-active
   transition: transform .5s
 
-.title-bar
+.header
   position: fixed
   top: 0
   left: 0
@@ -37,10 +39,10 @@ export default {
   display: flex
   height: 1rem
   line-height: 1rem
-  background: #f2f2f2
+  background: $headerBarBgColor
   text-align: center
   color: #888
-  z-index: 99
+  z-index: 100
   .icon-fanhui
     width: 1rem
     height: 1rem
