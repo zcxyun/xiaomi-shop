@@ -61,7 +61,12 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['changeTitle', 'changeShowTitleBar', 'changeShowBottomNaviBar']),
+    ...mapMutations([
+      'changeTitle',
+      'changeShowTitleBar',
+      'changeShowBottomNaviBar',
+      'changeSelectedBottomNav'
+    ]),
     changeHandler (label) {
     },
     stickyChangeHandler (current) {
@@ -73,7 +78,9 @@ export default {
     changeShowHeaderFooter () {
       this.changeShowTitleBar(true)
       this.changeShowBottomNaviBar(true)
-      this.changeTitle('分类')
+      const title = '分类'
+      this.changeTitle(title)
+      this.changeSelectedBottomNav(title)
     }
   },
   mounted () {

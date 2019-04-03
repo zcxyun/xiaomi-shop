@@ -91,7 +91,11 @@ export default {
   computed: {
   },
   methods: {
-    ...mapMutations(['changeShowTitleBar', 'changeShowBottomNaviBar']),
+    ...mapMutations([
+      'changeShowTitleBar',
+      'changeShowBottomNaviBar',
+      'changeSelectedBottomNav'
+    ]),
     onTabChange (label) {
       const comp = this.compNames.find(item => {
         return item.naviLabel === label
@@ -104,6 +108,7 @@ export default {
     changeShowHeaderFooter () {
       this.changeShowTitleBar(false)
       this.changeShowBottomNaviBar(true)
+      this.changeSelectedBottomNav('首页')
     },
     onSearch () {
       this.$router.push('/search')

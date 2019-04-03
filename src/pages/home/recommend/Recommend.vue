@@ -1,6 +1,6 @@
 <template>
   <div class="recommend">
-    <recommend-header-swiper :headerSwiperImgs='headerSwiperImgs'></recommend-header-swiper>
+    <recommend-header-swiper :headerSwiperImgs='headerSwiperImgs' @onBanner='onBanner'></recommend-header-swiper>
     <recommend-channel-icons :channelIcons='channelIcons'></recommend-channel-icons>
     <recommend-news :newsImgs='newsImgs'></recommend-news>
     <recommend-advert :img='advertImgs.redmi'></recommend-advert>
@@ -96,6 +96,9 @@ export default {
       this.appliances = res.appliances
       this.intelligences = res.intelligences
       this.themesImgs = res.themesImgs
+    },
+    onBanner (productId) {
+      this.$router.push('/product/' + productId)
     }
   }
 }

@@ -91,10 +91,15 @@ export default {
     MeMenu
   },
   methods: {
-    ...mapMutations(['changeShowTitleBar', 'changeShowBottomNaviBar']),
+    ...mapMutations([
+      'changeShowTitleBar',
+      'changeShowBottomNaviBar',
+      'changeSelectedBottomNav'
+    ]),
     changeShowHeaderFooter () {
       this.changeShowTitleBar(false)
       this.changeShowBottomNaviBar(true)
+      this.changeSelectedBottomNav('我的')
     }
   },
   mounted () {

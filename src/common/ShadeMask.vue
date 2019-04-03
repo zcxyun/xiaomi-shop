@@ -1,12 +1,9 @@
 <template>
-  <div class="mask" v-show='show'></div>
+  <div class="mask"></div>
 </template>
 <script>
 export default {
-  name: 'ShadeMask',
-  props: {
-    show: Boolean
-  }
+  name: 'ShadeMask'
 }
 </script>
 <style lang='stylus' scoped>

@@ -1,17 +1,23 @@
 <template>
-  <div class="search-result">
-    <div class="item" v-for="item of list" :key="item.label">
-      <span class="label">{{item.label}}</span>
-      <simple-tags :tags='item.tags'></simple-tags>
+  <div>
+    <shade-mask @click.native='onShadeMask'></shade-mask>
+    <div class="search-result">
+      <div class="item" v-for="item of list" :key="item.label">
+        <span class="label">{{item.label}}</span>
+        <simple-tags :tags='item.tags'></simple-tags>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import SimpleTags from 'common/tags/SimpleTags'
+import ShadeMask from 'common/ShadeMask'
+
 export default {
   name: 'SearchResult',
   components: {
-    SimpleTags
+    SimpleTags,
+    ShadeMask
   },
   data () {
     return {
@@ -34,6 +40,11 @@ export default {
         label: '手机上门服务',
         tags: []
       }]
+    }
+  },
+  methods: {
+    onShadeMask () {
+      this.$emit('onShadeMask')
     }
   }
 }

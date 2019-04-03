@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 阴影遮罩 -->
-    <shade-mask :show='showMask' @click.native='onShadeMaskClick'></shade-mask>
+    <shade-mask v-show='showMask' @click.native='onShadeMaskClick'></shade-mask>
     <!-- 顶部搜索栏 -->
     <div class="navi-header">
       <div class="header">
@@ -222,13 +222,13 @@ export default {
     display: flex
     .cube-scroll-content
       display: inline-block
-    .cube-tab-bar
-      line-height: .6rem
-      font-size: .27rem
-      white-space: nowrap
-      .cube-tab
-        padding: 0 .25rem
-        display: inline-block
+      .cube-tab-bar
+        line-height: .6rem
+        font-size: .27rem
+        white-space: nowrap
+        .cube-tab
+          padding: 0 .25rem
+          display: inline-block
   .arrow-wrapper
     z-index: 2
     display: flex

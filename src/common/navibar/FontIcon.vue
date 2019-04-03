@@ -1,24 +1,30 @@
 <template>
   <div class="font-icon">
-    <slot class="icon"></slot>
+    <slot :iconStyle='iconStyle'></slot>
   </div>
 </template>
 <script>
 export default {
-  name: 'FontIcon'
+  name: 'FontIcon',
+  data () {
+    return {
+      iconStyle: {
+        fontSize: '.25rem',
+        fontWeight: '800',
+        color: '#fff'
+      }
+    }
+  }
 }
 </script>
 <style lang='stylus' scoped>
 .font-icon
-  position: fixed
-  top: .1rem
-  left: .1rem
-  width: .7rem
+  width: .63rem
+  height: .63rem
   z-index: 10
   background: rgba(0,0,0,.6)
   border-radius: 50%
-  margin: 0 .2rem
-  .icon
-    color: #ddd
-    font-size: .2rem
+  display: flex
+  justify-content: center
+  align-items: center
 </style>

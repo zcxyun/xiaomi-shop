@@ -3,8 +3,7 @@
     <search-header @onSearchTextChange='onSearchTextChange'></search-header>
     <search-hot :hotImg='hotImg' :tags='hotTags' v-show="!showResult"></search-hot>
     <search-category :tags='cateTags' v-show="!showResult"></search-category>
-    <search-result v-show="showResult"></search-result>
-    <shade-mask v-show="showResult" @click.native='onShadeMask'></shade-mask>
+    <search-result v-show="showResult" @onShadeMask='onShadeMask'></search-result>
   </div>
 </template>
 <script>
@@ -13,7 +12,6 @@ import SearchHeader from './components/Header'
 import SearchHot from './components/Hot'
 import SearchCategory from './components/Category'
 import SearchResult from './components/Result'
-import ShadeMask from 'common/ShadeMask'
 
 import HTTP from '@/utils/http.js'
 
@@ -24,8 +22,7 @@ export default {
     SearchHeader,
     SearchHot,
     SearchCategory,
-    SearchResult,
-    ShadeMask
+    SearchResult
   },
   data () {
     return {

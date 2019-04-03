@@ -42,7 +42,12 @@ export default {
     ProductTwoCol
   },
   methods: {
-    ...mapMutations(['changeTitle', 'changeShowTitleBar', 'changeShowBottomNaviBar']),
+    ...mapMutations([
+      'changeTitle',
+      'changeShowTitleBar',
+      'changeShowBottomNaviBar',
+      'changeSelectedBottomNav'
+    ]),
     getLikeProductsInfo () {
       http.request({
         url: '/api/guessYouLike.json'
@@ -54,7 +59,9 @@ export default {
     changeShowHeaderFooter () {
       this.changeShowTitleBar(true)
       this.changeShowBottomNaviBar(true)
-      this.changeTitle('购物车')
+      const title = '购物车'
+      this.changeTitle(title)
+      this.changeSelectedBottomNav(title)
     }
   },
   mounted () {

@@ -44,7 +44,7 @@ export default {
       // console.log('当前轮播图序号为:' + current)
     },
     clickHandler (productId) {
-      this.$emit('onSwiper', productId)
+      this.$emit('onBanner', productId)
     }
   }
 }

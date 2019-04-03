@@ -13,5 +13,8 @@ export default {
   },
   changeTitle (state, newTitle) {
     state.title = newTitle
+  },
+  changeSelectedBottomNav (state, newVal) {
+    state.selectedBottomNav = newVal
   }
 }
